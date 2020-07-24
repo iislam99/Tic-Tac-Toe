@@ -1,6 +1,5 @@
 import pygame as pyg
-import time
-import random
+import time, random, sys
 pyg.init()
 run = True
 gameover = False
@@ -109,7 +108,7 @@ def check_win():
     elif total == 9:
         gameover = True
         tie = True
-
+    
 def gameloop():
     global grid, p1_turn, p2_turn, gameover, total, tie, run
     # Resetting variables if another game is played
@@ -127,6 +126,9 @@ def gameloop():
             for e in pyg.event.get():
                 if e.type == pyg.QUIT:
                     run = False
+                    gameover = False
+                    pyg.quit()
+                    sys.exit()
                 if e.type == pyg.MOUSEBUTTONUP:
                     gameover = False
                     gameloop()
@@ -150,6 +152,8 @@ def gameloop():
             # Clicking X to quit
             if e.type == pyg.QUIT:
                 run = False
+                pyg.quit()
+                sys.exit()
             
             # Mouse position
             m_x,m_y = pyg.mouse.get_pos()
@@ -182,4 +186,3 @@ def gameloop():
         check_win()
 
 gameloop()
-pyg.quit()
