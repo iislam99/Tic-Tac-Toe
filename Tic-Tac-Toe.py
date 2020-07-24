@@ -22,6 +22,7 @@ transparent.set_alpha(200)
 grid = [['', '', ''], ['', '', ''], ['', '', '']]
 total = 0
 tie = False
+width = 6 # Width of all lines drawn
 
 # Players
 p1 = 'X'
@@ -55,13 +56,13 @@ def draw_X(center_x, center_y):
     y1 = center_y - (screenSize/3)/4
     x2 = center_x + (screenSize/3)/4
     y2 = center_y + (screenSize/3)/4
-    pyg.draw.line(win, blue, (x1, y1), (x2, y2), width = 5)
+    pyg.draw.line(win, blue, (x1, y1), (x2, y2), width = width)
     
     x1 = center_x + (screenSize/3)/4
     y1 = center_y - (screenSize/3)/4
     x2 = center_x - (screenSize/3)/4
     y2 = center_y + (screenSize/3)/4
-    pyg.draw.line(win, blue, (x1, y1), (x2, y2), width = 5)
+    pyg.draw.line(win, blue, (x1, y1), (x2, y2), width = width)
 
 # Updates display
 def draw():
@@ -69,10 +70,10 @@ def draw():
     win.fill(black)
     
     # Grid
-    pyg.draw.line(win, white, (screenSize/3, 0), (screenSize/3, screenSize), width = 5)
-    pyg.draw.line(win, white, (screenSize/3 * 2, 0), (screenSize/3 * 2, screenSize), width = 5)
+    pyg.draw.line(win, white, (screenSize/3, 0), (screenSize/3, screenSize), width = width)
+    pyg.draw.line(win, white, (screenSize/3 * 2, 0), (screenSize/3 * 2, screenSize), width = width)
     pyg.draw.line(win, white, (0, screenSize/3), (screenSize, screenSize/3), width = 5)
-    pyg.draw.line(win, white, (0, screenSize/3 * 2), (screenSize, screenSize/3 * 2), width = 5)
+    pyg.draw.line(win, white, (0, screenSize/3 * 2), (screenSize, screenSize/3 * 2), width = width)
     
     # Player moves
     for r in range(3):
@@ -84,7 +85,7 @@ def draw():
                 center_y = r*(screenSize/3) + (screenSize/3)//2
                 draw_X(center_x, center_y)
             elif grid[r][c] == 'O':
-                pyg.draw.circle(win, red, (c*(screenSize/3) + (screenSize/3)//2, r*(screenSize/3) + (screenSize/3)//2), screenSize//8, width = 5)
+                pyg.draw.circle(win, red, (c*(screenSize/3) + (screenSize/3)//2, r*(screenSize/3) + (screenSize/3)//2), screenSize//8, width = width)
 
 # Checks if game is over
 def check_win():
@@ -161,25 +162,25 @@ def gameloop():
             # Mouse position relative to grid; determines locations of moves made
             if e.type == pyg.MOUSEBUTTONUP:
                 # Row 1
-                if m_x < screenSize/3 and m_y < screenSize/3:
+                if m_x < screenSize/3 - width/2 and m_y < screenSize/3 - width/2:
                     take_turn(0, 0)
-                elif m_x > screenSize/3 and m_x < screenSize/3 * 2 and m_y < screenSize/3:
+                elif m_x > screenSize/3 + width/2 and m_x < (screenSize/3 * 2) - width/2 and m_y < screenSize/3 - width/2:
                     take_turn(0, 1)
-                elif m_x > screenSize/3 * 2 and m_y < screenSize/3:
+                elif m_x > (screenSize/3 * 2) + width/2 and m_y < screenSize/3 - width/2:
                     take_turn(0, 2)
                 # Row 2
-                elif m_x < screenSize/3 and m_y > screenSize/3 and m_y < screenSize/3 * 2:
+                elif m_x < screenSize/3 - width/2 and m_y > screenSize/3 + width/2 and m_y < (screenSize/3 * 2) - width/2:
                     take_turn(1, 0)
-                elif m_x > screenSize/3 and m_x < screenSize/3 * 2 and m_y > screenSize/3 and m_y < screenSize/3 * 2:
+                elif m_x > screenSize/3 + width/2 and m_x < (screenSize/3 * 2) - width/2 and m_y > screenSize/3 + width/2 and m_y < (screenSize/3 * 2) - width/2:
                     take_turn(1, 1)
-                elif m_x > screenSize/3 * 2 and m_y > screenSize/3 and m_y < screenSize/3 * 2: 
+                elif m_x > (screenSize/3 * 2) + width/2 and m_y > screenSize/3 + width/2 and m_y < (screenSize/3 * 2) - width/2: 
                     take_turn(1, 2)
                 # Row 3
-                elif m_x < screenSize/3 and m_y > screenSize/3 * 2:
+                elif m_x < screenSize/3 - width/2 and m_y > (screenSize/3 * 2) + width/2:
                     take_turn(2, 0)
-                elif m_x > screenSize/3 and m_x < screenSize/3 * 2 and m_y > screenSize/3 * 2:
+                elif m_x > screenSize/3 + width/2 and m_x < (screenSize/3 * 2) - width/2 and m_y > (screenSize/3 * 2) + width/2:
                     take_turn(2, 1)
-                elif m_x > screenSize/3 * 2 and m_y > screenSize/3 * 2:
+                elif m_x > (screenSize/3 * 2) + width/2 and m_y > (screenSize/3 * 2) + width/2:
                     take_turn(2, 2)
         draw()
         pyg.display.update()
