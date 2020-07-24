@@ -50,6 +50,7 @@ def take_turn(x, y):
             p2_turn = False
         total += 1
 
+# Draws an X given an x,y position for its center
 def draw_X(center_x, center_y):
     x1 = center_x - (screenSize/3)/4
     y1 = center_y - (screenSize/3)/4
@@ -63,6 +64,7 @@ def draw_X(center_x, center_y):
     y2 = center_y + (screenSize/3)/4
     pyg.draw.line(win, blue, (x1, y1), (x2, y2), width = 5)
 
+# Updates display
 def draw():
     pyg.display.set_caption("Tic-Tac-Toe")
     win.fill(black)
@@ -107,7 +109,7 @@ def check_win():
     elif total == 9:
         gameover = True
         tie = True
-    
+
 def gameloop():
     global grid, p1_turn, p2_turn, gameover, total, tie, run
     # Resetting variables if another game is played
