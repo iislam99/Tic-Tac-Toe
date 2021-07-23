@@ -72,7 +72,7 @@ def draw():
     # Grid
     pyg.draw.line(win, white, (screenSize/3, 0), (screenSize/3, screenSize), width = width)
     pyg.draw.line(win, white, (screenSize/3 * 2, 0), (screenSize/3 * 2, screenSize), width = width)
-    pyg.draw.line(win, white, (0, screenSize/3), (screenSize, screenSize/3), width = 5)
+    pyg.draw.line(win, white, (0, screenSize/3), (screenSize, screenSize/3), width = width)
     pyg.draw.line(win, white, (0, screenSize/3 * 2), (screenSize, screenSize/3 * 2), width = width)
     
     # Player moves
